@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="col-md-6">
+{% if not coming_soon %}
+<form role="form" action='.' method='post'>{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" id="inputSymbolNo" name="inputSymbolNo" placeholder="Symbol no (0104637 or 0104637M)" maxlength="8" required="required" pattern="^(\d{7}|\d{7}[A-Z])$">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="inputDOB" name="inputDOB" placeholder="Date of Birth (YYYY-MM-DD)" maxlength="10" pattern="^(19|20)\d\d[\-\/.](0[1-9]|1[012])[\-\/.](0[1-9]|[12][0-9]|3[01])$">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% else %}
+<h1>Result Coming Soon ...</h1>
+<p>You can view the result here once it is published.</p>
+<p>Please check back later.</p>
+{% endif %}
+</div>
+</div>
+{% endblock %}
