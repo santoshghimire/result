@@ -84,7 +84,7 @@ class FormView(View):
                 }
             )
             for match in matches:
-                mydiv = match.previous_sibling()
-                print mydiv
+#                mydiv = match.previous_sibling()
+ #               print mydiv
                 return str(match)
             return '<p>Sorry ! The symbol number and date of birth do not match</p>'
