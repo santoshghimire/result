@@ -21,7 +21,7 @@ class FormView(View):
         content = rsp.read()
         if 'coming soon' in content:
             parameters['coming_soon'] = True
-        parameters['coming_soon'] = False   # for testing only
+        # parameters['coming_soon'] = False   # for testing only
         return render(request, self.template_name, parameters)
 
     def post(self, request, *args, **kwargs):
