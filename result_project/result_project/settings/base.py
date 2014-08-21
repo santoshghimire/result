@@ -1,11 +1,14 @@
 """Common settings and globals."""
 
 
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, basename, dirname, join, normpath, realpath
 from sys import path
 
 
 ########## PATH CONFIGURATION
+
+APP_ROOT = realpath('.')
+
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
@@ -23,7 +26,7 @@ path.append(DJANGO_ROOT)
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
+DEBUG = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
@@ -88,7 +91,8 @@ MEDIA_URL = '/media/'
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
+#STATIC_ROOT = normpath(join(SITE_ROOT, 'static'))
+STATIC_ROOT = APP_ROOT + '/../static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
@@ -149,7 +153,8 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    normpath(join(SITE_ROOT, 'templates')),
+   # normpath(join(SITE_ROOT, 'templates')),
+	'/srv/www/result.phunka.com/application/result_project/templates',
 )
 ########## END TEMPLATE CONFIGURATION
 
@@ -194,6 +199,7 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'mainapp',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -244,7 +250,7 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 # See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
 INSTALLED_APPS += (
     # Database migration helpers:
-    'south',
+   # 'south',
 )
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False

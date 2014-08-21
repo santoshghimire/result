@@ -15,7 +15,10 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ########## END DEBUG CONFIGURATION
 
-
+TEMPLATE_DIRS = (
+   # normpath(join(SITE_ROOT, 'templates')),
+    'templates',
+)
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
