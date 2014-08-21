@@ -31,10 +31,11 @@ class FormView(View):
         dob = request.POST.get('inputDOB')
         parameters['dob'] = dob
         if dob == '':
+            print 'dob not entered'
             content = self.get_result(symbolno)
         else:
+            print 'dob entered'
             content = self.get_result(symbolno, dob)
-        print content
         parameters['result_content'] = content
         return render(request, self.result_template, parameters)
 
@@ -57,7 +58,6 @@ class FormView(View):
         try:
             r = requests.post(url, payload)
         except:
-            print 'error'
             return '<p>Sorry ! The symbol number and date of birth do not match</p>'
 
         # start parsing the response with beautifulsoap4
@@ -85,7 +85,5 @@ class FormView(View):
                 }
             )
             for match in matches:
-                # mydiv = match.previous_sibling()
-                # print mydiv
                 return str(match)
-            return '<p>Sorry ! The symbol number and date of birth do not match</p>'
+            return '<p>Sorry ! The symbol number and date of birth do not match.</p>'
