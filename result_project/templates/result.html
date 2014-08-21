@@ -3,6 +3,10 @@
 {% block content %}
 <div class="container">
 <div class="col-md-6">
+<p>Symbol no: {{symbolno}}</p>
+{% if dob %}
+<p>Date of Birth: {{dob}}</p>
+{% endif %}
 {{result_content|safe}}
 <p><a href="/">View another result</a></p>
 </div>
