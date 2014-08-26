@@ -72,4 +72,4 @@ def get_html_ntc(symbol_no, date_of_birth):
     except:
         return {'status':"error", 'message':'no result'}
 
-print get_html_ntc(symbol_no='0295639', date_of_birth='2054-09-20')
+# print get_html_ntc(symbol_no='0295639', date_of_birth='2054-09-20')
