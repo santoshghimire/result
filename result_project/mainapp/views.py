@@ -19,6 +19,10 @@ class FormView(View):
         req = urllib2.Request(url)
         rsp = urllib2.urlopen(req)
         content = rsp.read()
+
+        # testing for tu result
+        # tu_faculties = self.get_tu_faculties()
+        # self.get_tu_result(tu_faculties)
         if 'coming soon' in content:
             parameters['coming_soon'] = True
         # parameters['coming_soon'] = False   # for testing only
@@ -40,6 +44,9 @@ class FormView(View):
         return render(request, self.result_template, parameters)
 
     def get_result(self, symbolno, dob=None):
+        '''
+        Function to get hseb result
+        '''
         if dob is None:
             # url = 'http://hseb.ntc.net.np/'
             url = 'http://slc.ntc.net.np/slc2070.php'
@@ -87,3 +94,30 @@ class FormView(View):
             for match in matches:
                 return str(match)
             return '<p>Sorry ! The symbol number and date of birth do not match.</p>'
+
+    def get_tu_faculties(self):
+        url = 'http://tu.ntc.net.np/result.php'
+        page = urllib2.urlopen(url)
+        soup = BeautifulSoup(page.read())
+        matches = soup.findAll('select', attrs={'name': 'faculty'})
+        for match in matches:
+            # print ('Element: {0} , {1}'.format(type(matches), matches[0]))
+            options = match.findAll('option')
+            option_list = {i['value']: i.get_text() for i in options}
+            return option_list
+
+    def get_tu_result(self, tu_faculties):
+        url = 'http://tu.ntc.net.np/result.php'
+        # print tu_faculties
+        payload = {
+            "faculty": 112,
+            "symbol": 2113824,
+            "submit": 'Submit'
+        }
+        r = requests.post(url, payload)
+        response_html = r.content
+        soup = BeautifulSoup(response_html)
+        matches = soup.findAll('div', attrs={'id': 'show-result'})
+        for match in matches:
+            print str(match)
+        # return '<p>Sorry ! Not found</p>'

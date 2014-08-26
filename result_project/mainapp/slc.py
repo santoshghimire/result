@@ -1,9 +1,9 @@
-import time, datetime
+# import time, datetime
 import json
-from bson.objectid import ObjectId
-import requests, urllib2, urllib, cookielib
-from Extract import extract
-from django.http import HttpResponseRedirect, HttpResponse
+# from bson.objectid import ObjectId
+import urllib2, urllib, cookielib
+from mainapp.Extract import extract
+from django.http import HttpResponse
 from .classes.SLCData import ResultRequest, ResultRequestSuccess
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
