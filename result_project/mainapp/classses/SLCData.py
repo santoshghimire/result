@@ -5,7 +5,7 @@ import datetime
 
 class ResultRequest():
     def __init__(self):
-        self.db_object = MongoConnection("localhost", 27017, 'mcq')
+        self.db_object = MongoConnection("localhost", 27017, 'resultapp')
         self.table_name = 'SLCresultrequest'
         self.db_object.create_table(self.table_name, 'number')
 
