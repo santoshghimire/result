@@ -251,6 +251,7 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 INSTALLED_APPS += (
     # Database migration helpers:
    # 'south',
+   
 )
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
