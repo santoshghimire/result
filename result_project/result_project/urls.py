@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 # from django.conf import settings
 # from django.views.generic import TemplateView
 from mainapp.views import FormView
+from mainapp.tu_view import TUFormView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -13,6 +14,11 @@ urlpatterns = patterns(
         r'^$',
         view=FormView.as_view(),
         name='form'
+    ),
+    url(
+        r'^tu/$',
+        view=TUFormView.as_view(),
+        name='tuform'
     ),
 
     # Examples:

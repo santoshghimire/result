@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="col-md-6">
+<form role="form" action='.' method='post'>{% csrf_token %}
+  <div class="form-group">
+	  <select name="faculty" class="form-control">
+	  	{% for key, value in tu_faculties.items %}
+	  	<option value={{key}}>{{value}}</option>
+	  	{% endfor %}
+	  </select>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="inputSymbolNo" name="inputSymbolNo" placeholder="Symbol No (e.g. 2113824)" maxlength="8" required="required" pattern="^\d{4,8}$">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+</div>
+{# <iframe src="http://www.csc.ncsu.edu/faculty/healey/tweet_viz/tweet_app/"></iframe> #}
+
+{% endblock %}

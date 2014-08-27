@@ -4,11 +4,14 @@
 <div class="container">
 <div class="col-md-6">
 <p>Symbol no: {{symbolno}}</p>
+{% if faculty %}
+<p>Faculty: {{faculty}}</p>
+{% endif %}
 {% if dob %}
 <p>Date of Birth: {{dob}}</p>
 {% endif %}
 {{result_content|safe}}
-<p><a href="/">View another result</a></p>
+<p><a class="btn btn-info" href="{% url another_result %}">View another result</a></p>
 </div>
 </div>
 {% endblock %}
