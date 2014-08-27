@@ -35,10 +35,8 @@ class FormView(View):
         dob = request.POST.get('inputDOB')
         parameters['dob'] = dob
         if dob == '':
-            print 'dob not entered'
             content = self.get_result(symbolno)
         else:
-            print 'dob entered'
             content = self.get_result(symbolno, dob)
         parameters['result_content'] = content
         return render(request, self.result_template, parameters)
