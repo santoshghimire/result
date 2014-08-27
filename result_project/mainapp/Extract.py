@@ -30,7 +30,17 @@ def get_subject_mark(row):
     practical = tds[4].text.encode('utf-8').strip()
     marks_dic['practical_attempt'] = practical.count("#")
     practical = practical.replace("#","")
-    marks_dic['practical'] = h.unescape(practical).encode('utf-8').strip().replace('\xc2','').replace('\xa0','')
+    try:
+        marks_dic['practical'] = h.unescape(practical).encode('utf-8').strip()        
+    except:
+        import re
+        pr = re.match(r'\d+', h.unescape(practical))
+        if pr != None:
+            marks_dic['practical'] = int(pr.group())
+        else:
+            marks_dic['practical'] = ""
+        
+        
 
     total = tds[5].text.encode('utf-8').strip()
     marks_dic['total_obtained'] = h.unescape(total).encode('utf-8').strip().replace('\xc2','').replace('\xa0','')
@@ -76,8 +86,12 @@ def extract(page):
     try:
         name_sex = matches[0].text.split('(')
         name = name_sex[0].strip()
-        sex = name_sex[1].replace(")","").strip()
+        try:
+            sex = name_sex[1].replace(")","").strip()
+        except:
+            sex = ""
     except:
+
         error['message'] = "Student Name or sex could not be extracted"
         return error
 

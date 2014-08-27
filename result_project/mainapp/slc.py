@@ -49,6 +49,7 @@ def find_result(request):
             content = rsp.read()
             result = extract(content)
             
+            
         else:            
             from slcntc import get_html_ntc
             result = get_html_ntc(number, dob.replace('/','-'))
