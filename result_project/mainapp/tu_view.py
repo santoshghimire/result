@@ -31,7 +31,6 @@ class TUFormView(View):
         symbolno = request.POST.get('inputSymbolNo')
         parameters['symbolno'] = symbolno
         faculty = request.POST.get('faculty')
-        parameters['faculty'] = faculty
         payload = {
             "faculty": faculty,
             "symbol": symbolno,
