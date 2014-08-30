@@ -26,12 +26,12 @@ class FormView(View):
         parameters = {}
         symbolno = request.POST.get('inputSymbolNo')
         parameters['symbolno'] = symbolno
-        # dob = request.POST.get('inputDOB')
-        # parameters['dob'] = dob
-        # if dob == '':
-        content = self.get_result(symbolno)
-        # else:
-        #     content = self.get_result(symbolno, dob)
+        dob = request.POST.get('inputDOB')
+        parameters['dob'] = dob
+        if dob == '':
+            content = self.get_result(symbolno)
+        else:
+            content = self.get_result(symbolno, dob)
         parameters['result_content'] = content
         parameters['another_result'] = 'form'
         return render(request, self.result_template, parameters)
@@ -48,11 +48,16 @@ class FormView(View):
                 "Submit": 'Submit'
             }
         else:
-            url = 'http://slc.ntc.net.np/slc2070_ledger.php'
+            url = 'http://hseb.ntc.net.np/markSheet.php'
+# dob:2051/07/06
+# no:20506169
+# rem:PASS
+# Submit:ShowMarks
             payload = {
-                "symbol": symbolno,
+                "no": symbolno,
                 "dob": dob,
-                "submit": 'Submit'
+                # 'rem': 'PASS',
+                "Submit": 'ShowMarks'
             }
         # headers = {'User-Agent': 'Mozilla/5.0'}
         try:
@@ -68,21 +73,24 @@ class FormView(View):
             # for pass-fail result
             matches = soup.findAll('div', attrs={'id': 'show-result'})
             for match in matches:
-                return str(match)
+                remove = '(Date Format - YYYY/MM/DD example 2044/05/05 or 1983/04/25)'
+                final_response = str(match).replace(remove, '')
+                # return str(match)
+                return final_response
             return '<p>Sorry ! Not found</p>'
         else:
             # for marksheet result
             matches = soup.findAll(
-                'table',
-                attrs={
-                    'border': "1",
-                    'cellpadding': "15",
-                    'bgcolor': "#fcfcfc",
-                    'cellspacing': "0",
-                    'style': "border-collapse: collapse",
-                    'bordercolor': "#DDDDDD",
-                    'width': "100%"
-                }
+                'table'
+                # attrs={
+                #     'border': "1",
+                #     'cellpadding': "15",
+                #     'bgcolor': "#fcfcfc",
+                #     'cellspacing': "0",
+                #     'style': "border-collapse: collapse",
+                #     'bordercolor': "#DDDDDD",
+                #     'width': "100%"
+                # }
             )
             for match in matches:
                 return str(match)
