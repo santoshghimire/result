@@ -26,12 +26,12 @@ class FormView(View):
         parameters = {}
         symbolno = request.POST.get('inputSymbolNo')
         parameters['symbolno'] = symbolno
-        dob = request.POST.get('inputDOB')
-        parameters['dob'] = dob
-        if dob == '':
-            content = self.get_result(symbolno)
-        else:
-            content = self.get_result(symbolno, dob)
+        # dob = request.POST.get('inputDOB')
+        # parameters['dob'] = dob
+        # if dob == '':
+        content = self.get_result(symbolno)
+        # else:
+        #     content = self.get_result(symbolno, dob)
         parameters['result_content'] = content
         parameters['another_result'] = 'form'
         return render(request, self.result_template, parameters)
@@ -41,8 +41,8 @@ class FormView(View):
         Function to get hseb result
         '''
         if dob is None:
-            # url = 'http://hseb.ntc.net.np/'
-            url = 'http://slc.ntc.net.np/slc2070.php'
+            url = 'http://hseb.ntc.net.np/result.php'
+            # url = 'http://slc.ntc.net.np/slc2070.php'
             payload = {
                 "symbol": symbolno,
                 "Submit": 'Submit'
