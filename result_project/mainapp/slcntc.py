@@ -12,7 +12,7 @@ def get_html_ntc(symbol_no, date_of_birth):
         payload = {
         	'symbol':symbol_no,
         	'dob':date_of_birth,
-            'submit':'Submit'
+            'submit':'submit'
         }    
         r = requests.post(request_url, payload)
         soup = BeautifulSoup(r.text)
