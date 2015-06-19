@@ -8,7 +8,7 @@ import requests
 def get_html_ntc(symbol_no, date_of_birth, result_type='supple'):
     try:
         # request_url = 'http://slc.ntc.net.np/slc2070_ledger.php'
-        request_url  = 'http://slc.ntc.net.np/slc2070supp_ledger.php'
+        request_url  = 'http://slc.ntc.net.np/slc2071_ledger.php'
         payload = {
         	'symbol':symbol_no,
         	'dob':date_of_birth,
@@ -102,4 +102,3 @@ def get_html_ntc(symbol_no, date_of_birth, result_type='supple'):
     except:
         return {'status':"error", 'message':'no result'}
 
-print get_html_ntc(symbol_no='0412286D', date_of_birth='2056-02-10')
